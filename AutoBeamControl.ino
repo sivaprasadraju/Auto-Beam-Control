@@ -63,6 +63,27 @@ void idle_state(void)
   }
 }
 
+ISR(INT0_vect)
+{
+  cli();
+  if(FLAG.FLAG_ISR_INT0 == 1)
+  {
+   value = adc_read(0);
+  }
+  else
+  {
+    FLAG.FLAG_ISR_INT0 = 1;
+  }
+  sei();
+}
+
+ISR(INT1_vect)
+{
+  cli();
+  FLAG.FLAG_ISR_INT0 = 0;
+  sei();
+}
+
 int main()
 {
   SET_BIT(DDRB,PB1);
