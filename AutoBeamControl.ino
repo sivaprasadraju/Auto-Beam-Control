@@ -84,6 +84,20 @@ ISR(INT1_vect)
   sei();
 }
 
+ISR(TIMER2_COMPA_vect)
+{
+    cli();
+    CLR_BIT(PORTB,PB1);    
+    sei();
+}
+
+ISR(TIMER2_COMPB_vect)
+{
+    cli();
+    SET_BIT(PORTB,PB1);
+    sei();
+}
+
 int main()
 {
   SET_BIT(DDRB,PB1);
