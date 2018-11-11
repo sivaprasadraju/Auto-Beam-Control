@@ -15,3 +15,9 @@
 #define SET_BIT(PORT,BIT) PORT|= (1<<BIT)
 #define CLR_BIT(PORT,BIT) PORT&= ~(1<<BIT)
 #define ADC_PIN 0
+
+struct
+{
+  volatile unsigned int FLAG_ISR_INT1:1;
+  volatile unsigned int FLAG_ISR_INT0:1;
+}FLAG;
