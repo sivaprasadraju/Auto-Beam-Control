@@ -21,3 +21,5 @@ struct
   volatile unsigned int FLAG_ISR_INT1:1;
   volatile unsigned int FLAG_ISR_INT0:1;
 }FLAG;
+
+volatile int value;
