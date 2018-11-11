@@ -98,6 +98,18 @@ ISR(TIMER2_COMPB_vect)
     sei();
 }
 
+uint16_t adc_read(uint8_t adc)
+{
+  ADCSRA |= 1<<ADEN;
+  ADMUX |= (1<<REFS0);
+  ADMUX |= (adc & 0x0f);
+  ADCSRA |= (1<<ADSC);
+  while(ADCSRA & (1<<ADSC))
+  {
+  }
+  return ADC;
+}
+
 int main()
 {
   SET_BIT(DDRB,PB1);
