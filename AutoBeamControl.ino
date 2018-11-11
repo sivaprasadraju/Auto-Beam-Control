@@ -24,6 +24,45 @@ struct
 
 volatile int value;
 
+void idle_state(void)
+{
+  while(1)
+  {
+    //Serial.println("Entered into idle state");
+    if(FLAG.FLAG_ISR_INT0 == 1)
+    {
+      //Serial.println("SWITCH1 ON");
+      value = adc_read(0);
+      Serial.println(value);
+        if(value >= 0 && value<= 200 )
+          {
+                //Serial.println("Entered into Low  state");
+                OCR2A = 255;
+                OCR2B = 255;
+                value = adc_read(0);
+                Serial.println(value);
+          }
+        else if(value > 200  && value <= 400)
+          {
+                //Serial.println("Entered into medium State");
+                OCR2A = 128;
+                OCR2B = 255;
+                value = adc_read(0);
+                Serial.println(value);
+          }
+        else if(value > 400)
+          {
+                //Serial.println("Entered into high state");
+                OCR2A = 64;
+                OCR2B = 255;
+               value = adc_read(0);
+                Serial.println(value);
+          }
+        
+      }
+  }
+}
+
 int main()
 {
   SET_BIT(DDRB,PB1);
